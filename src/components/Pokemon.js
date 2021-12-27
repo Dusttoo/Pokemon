@@ -5,17 +5,18 @@ function Pokemon({pokedex}) {
   const [loaded, setLoaded] = useState(false);
   const [pokemon, setPokemon] = useState('squirtle')
   const [pokemonData, setPokemonData] = useState("");
-  const [poke_id, setPokeId] = useState(0)
+  const [poke_id, setPokeId] = useState(randomPokemon());
 
 
 //   console.log(randomPokemon())
   useEffect(() => {
     (async () => {
-        setPokeId(randomPokemon());
         const rendered_pokemon = await pokedex.pokedex.getPokemonByName(poke_id);
-        console.log(rendered_pokemon, poke_id, randomPokemon())
-        setPokemonData(rendered_pokemon)
-        setLoaded(true)
+        if(rendered_pokemon) {
+            setPokemonData(rendered_pokemon);
+            setLoaded(true);
+        }
+        
     })();
   }, []);
 
@@ -23,7 +24,7 @@ function Pokemon({pokedex}) {
 
   return (
     <div className="pokemon">
-      {loaded && (
+      {loaded ? (
         <>
         {poke_id && 
         <>
@@ -33,7 +34,8 @@ function Pokemon({pokedex}) {
         }
 
         </>
-      )}
+      ) :
+      <h1>Throwing Pokeball...</h1>}
     </div>
   );
 }
