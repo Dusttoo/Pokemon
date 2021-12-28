@@ -1,10 +1,20 @@
 import { useEffect, useState } from 'react';
 import Pokemon from './components/Pokemon';
+import { eraseCookie, getCookie, storePokeId } from './components/utils';
 import './index.css'
 
 function App(pokedex) {
   const [loaded, setLoaded] = useState(false)
   const [pokeball, openPokeball] = useState(false)
+  const cookie = getCookie('poke_id')
+
+
+    useEffect(() => {
+      if (cookie) {
+        openPokeball(true);
+      }
+    }, []);
+  
 
 
   return (
@@ -18,6 +28,7 @@ function App(pokedex) {
           <button
             className="pokeball-button"
             onClick={() => {
+              storePokeId();
               openPokeball(true);
             }}
           >
@@ -35,6 +46,7 @@ function App(pokedex) {
           <button
             onClick={() => {
               openPokeball(false);
+              eraseCookie('poke_id')
             }}
           >
             Throw Pokeball Again?
