@@ -41,3 +41,22 @@
     text-align: center;
     border-radius: 5px;
 }
+
+.returning-message {
+    text-align: center;
+}
+
+.rethrow-button {
+    background: none;
+    border: none;
+    margin: 20px;
+    font-size: 45px;
+    background: #ff1f1f;
+    color: white;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.rethrow-button:hover {
+    cursor: pointer;
+}

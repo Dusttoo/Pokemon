@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import PokemonStats from "./Pokemon_Stats";
 import Species from "./Species";
-import { getCookie, randomPokemon, setCookie } from "./utils";
+import { getCookie} from "./utils";
 import "./pokemon.css";
 
-function Pokemon({ pokedex }) {
+function Pokemon({ pokedex, rethrow }) {
   const [loaded, setLoaded] = useState(false);
   const [pokemonData, setPokemonData] = useState("");
   const poke_id = getCookie("poke_id");
@@ -38,6 +38,7 @@ function Pokemon({ pokedex }) {
               <h2>XP: {pokemonData.base_experience}</h2>
               <Species species={pokemonData.species} pokedex={pokedex} />
               <PokemonStats stats={pokemonData.stats} />
+              {rethrow}
             </div>
           )}
         </>
