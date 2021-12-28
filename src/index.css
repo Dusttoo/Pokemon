@@ -1,0 +1,24 @@
+.main-header {
+  text-align: center;
+}
+.tagline {
+  text-align: center;
+}
+
+.pokeball-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pokeball-button {
+  background: none;
+  border: none;
+}
+
+.pokeball-button:hover {
+  cursor: pointer;
+}
+
+.pokeball-img {
+  height: 150px;
+}
