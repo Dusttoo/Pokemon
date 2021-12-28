@@ -18,8 +18,16 @@ function App(pokedex) {
           Throw Pokeball
         </button>
       ) : (
+        <>
         <Pokemon pokedex={pokedex}/>
-
+        <button
+          onClick={() => {
+            openPokeball(false);
+          }}
+        >
+          Throw Pokeball Again
+        </button>
+        </>
       )}
     </>
   );

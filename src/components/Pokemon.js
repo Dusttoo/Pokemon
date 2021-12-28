@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import PokemonStats from "./Pokemon_Stats";
+import Species from "./Species";
 import { randomPokemon } from "./utils";
 
 function Pokemon({pokedex}) {
   const [loaded, setLoaded] = useState(false);
-  const [pokemon, setPokemon] = useState('squirtle')
   const [pokemonData, setPokemonData] = useState("");
-  const [poke_id, setPokeId] = useState(randomPokemon());
+  const poke_id = randomPokemon();
 
 
 //   console.log(randomPokemon())
@@ -20,7 +21,7 @@ function Pokemon({pokedex}) {
     })();
   }, []);
 
-//   console.log(poke_id)
+  console.log(pokemonData)
 
   return (
     <div className="pokemon">
@@ -30,6 +31,9 @@ function Pokemon({pokedex}) {
         <>
           <h1>{pokemonData.name}</h1>
           <img src={pokemonData.sprites["front_default"]} alt={pokemonData.name} />
+          <span>XP: {pokemonData.base_experience}</span>
+          <Species species={pokemonData.species} pokedex={pokedex} />
+          <PokemonStats stats={pokemonData.stats} />
         </>
         }
 
