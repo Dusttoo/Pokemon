@@ -22,7 +22,7 @@ function Species({species, pokedex}) {
     <>
       <h2>Species: {species.name}</h2>
       {speciesData.habitat ? <p>Habitat: {speciesData.habitat.name}</p>
-      : <p>Unknown</p>}
+      : <p>Habitat: Unknown</p>}
     </>
   );
 }

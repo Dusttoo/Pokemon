@@ -31,10 +31,11 @@ function Pokemon({ pokedex }) {
             <div className="pokemon-card">
               <h1 className="pokemon-name">{pokemonData.name}</h1>
               <img
+                className="pokemon-image"
                 src={pokemonData.sprites["front_default"]}
                 alt={pokemonData.name}
               />
-              <span>XP: {pokemonData.base_experience}</span>
+              <h2>XP: {pokemonData.base_experience}</h2>
               <Species species={pokemonData.species} pokedex={pokedex} />
               <PokemonStats stats={pokemonData.stats} />
             </div>
