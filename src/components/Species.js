@@ -20,10 +20,9 @@ function Species({species, pokedex}) {
 
   return (
     <>
-      <h2>
-        Species: {species.name}
-      </h2>
-      <p>Habitat: {speciesData.habitat.name}</p>
+      <h2>Species: {species.name}</h2>
+      {speciesData.habitat ? <p>Habitat: {speciesData.habitat.name}</p>
+      : <p>Unknown</p>}
     </>
   );
 }

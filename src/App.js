@@ -9,9 +9,11 @@ function App(pokedex) {
 
   return (
     <>
+
+      {!pokeball ? (
+      <>
       <h1 className="main-header">Who will you catch?!</h1>
       <p className="tagline">Click the pokeball to find out</p>
-      {!pokeball ? (
         <div className="pokeball-container">
           <button
             className="pokeball-button"
@@ -26,6 +28,7 @@ function App(pokedex) {
             />
           </button>
         </div>
+      </>
       ) : (
         <>
           <Pokemon pokedex={pokedex} />
