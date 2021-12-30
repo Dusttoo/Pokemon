@@ -34,3 +34,27 @@ export function storePokeId() {
       return id
     } 
 }
+
+export function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+
+export function catchPokemon(data) {
+  const catchNum = getCookie('catch_num')
+  console.log('catch num', catchNum)
+  if(!catchNum) {
+      let max = data.capture_rate;
+      if (data.is_baby) max /= 3;
+      if (data.is_legendary) max *= 10;
+      if (data.is_mythical) max *= 15;
+
+      const toCatch = getRandomIntInclusive(1, max);
+      setCookie("catch_num", toCatch, 7);
+  }
+
+
+  return parseInt(catchNum)
+
+}

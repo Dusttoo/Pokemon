@@ -8,6 +8,7 @@ function App(pokedex) {
   const [pokeball, openPokeball] = useState(false)
   const [firstThrow, setFirstThrow] = useState(false)
   const cookie = getCookie('poke_id')
+  console.log(getCookie('catch_num'))
 
 
     useEffect(() => {
@@ -57,6 +58,7 @@ function App(pokedex) {
                 onClick={() => {
                   openPokeball(false);
                   eraseCookie("poke_id");
+                  eraseCookie('catch_num')
                   setFirstThrow(false);
                 }}
               >

@@ -8,6 +8,7 @@ function Pokemon({ pokedex, rethrow }) {
   const [loaded, setLoaded] = useState(false);
   const [pokemonData, setPokemonData] = useState("");
   const poke_id = getCookie("poke_id");
+  const caught_pokemon = getCookie("caught")
 
 
   useEffect(() => {
@@ -36,10 +37,11 @@ function Pokemon({ pokedex, rethrow }) {
                 alt={pokemonData.name}
               />
               <h2>XP: {pokemonData.base_experience}</h2>
-              <Species species={pokemonData.species} pokedex={pokedex} />
+              <Species species={pokemonData.species} pokedex={pokedex} caught_pokemon={caught_pokemon}/>
               <PokemonStats stats={pokemonData.stats} />
-              {rethrow}
-            </div>
+                {rethrow}
+                
+              </div>
           )}
         </>
       ) : (
