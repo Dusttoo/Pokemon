@@ -4,6 +4,8 @@ import { catchPokemon, getCookie, getRandomIntInclusive, setCookie } from "./uti
 function Species({species, pokedex, caught_pokemon}) {
     const [speciesData, setSpeciesData] = useState('')
     const [loaded, setLoaded] = useState(false)
+    const [caught, setCaught] = useState(false)
+    const [failedCatch, setFailed] = useState(false)
     const magicNum = getCookie('catch_num')
     const poke_list = getCookie('poke_list')
       useEffect(() => {
@@ -50,8 +52,9 @@ function Species({species, pokedex, caught_pokemon}) {
             all_pokemon.push(speciesData.id)
             console.log('pushed new', all_pokemon)
             setCookie('poke_list', JSON.stringify(all_pokemon))
-
-          }
+            setFailed(false)
+            setCaught(true)
+          } else { setFailed(true)}
 
 
       }
@@ -67,10 +70,18 @@ function Species({species, pokedex, caught_pokemon}) {
       ) : (
         <p>Habitat: Unknown</p>
       )}
+
       {!JSON.parse(poke_list).includes(speciesData.id) ? (
-        <button className="catch-pokemon" onClick={attemptCatch}>
-          Try to catch?
-        </button>
+        <>
+          {caught ? (
+            <p>Success you caught {speciesData.name}!</p>
+          ) : 
+          
+            <button className="catch-pokemon" onClick={attemptCatch}>
+              Try to catch?
+            </button>
+          }
+        </>
       ) : (
         <p>You own this pokemon</p>
       )}
