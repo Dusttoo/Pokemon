@@ -73,14 +73,15 @@ function Species({species, pokedex, caught_pokemon}) {
 
       {!JSON.parse(poke_list).includes(speciesData.id) ? (
         <>
+          {failedCatch && <p>Sorry, {speciesData.name} got away.
+          Try again?</p>}
           {caught ? (
             <p>Success you caught {speciesData.name}!</p>
-          ) : 
-          
+          ) : (
             <button className="catch-pokemon" onClick={attemptCatch}>
               Try to catch?
             </button>
-          }
+          )}
         </>
       ) : (
         <p>You own this pokemon</p>
