@@ -30,12 +30,18 @@ function GetPokemon({ pokedex, poke_id, openBag }) {
           <h1>{pokemon.name}</h1>
           <p>XP: {pokemon.base_experience} </p>
           <PokemonStats stats={pokemon.stats} />
-          {pokemon.held_items.map((item) => {
-            return (
-              // <p>{item.item.name}</p>
-              <Item pokedex={pokedex} name={item.item.name} />
-            );
-          })}
+          <h3>Items</h3>
+          <div className="items-container">
+            {pokemon.held_items.length === 0 ? (
+              <p>no items</p>
+            ) : (
+              <>
+                {pokemon.held_items.map((item) => {
+                  return <Item pokedex={pokedex} name={item.item.name} />;
+                })}
+              </>
+            )}
+          </div>
           <p>Unlocked abilities:</p>
           <ul>
             {pokemon.abilities.map((ability) => {
