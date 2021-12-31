@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCookie } from "./utils";
 import Item from "./Item";
+import PokemonStats from "./Pokemon_Stats";
 
 function GetPokemon({ pokedex, poke_id, openBag }) {
   const [loaded, setLoaded] = useState(false);
@@ -17,6 +18,7 @@ function GetPokemon({ pokedex, poke_id, openBag }) {
     })();
   }, []);
 
+    console.log(pokemon)
 
 
 
@@ -27,6 +29,7 @@ function GetPokemon({ pokedex, poke_id, openBag }) {
           <img src={pokemon.sprites["front_default"]} alt={pokemon.name}></img>
           <h1>{pokemon.name}</h1>
           <p>XP: {pokemon.base_experience} </p>
+          <PokemonStats stats={pokemon.stats} />
           {pokemon.held_items.map((item) => {
             return (
               // <p>{item.item.name}</p>
