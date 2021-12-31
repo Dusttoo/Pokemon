@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getCookie } from "./utils";
+import Item from "./Item";
 
-function GetPokemon({ pokedex, poke_id }) {
+function GetPokemon({ pokedex, poke_id, openBag }) {
   const [loaded, setLoaded] = useState(false);
   const [pokemon, setPokemon] = useState({})
-
+  let key = 0
 
   useEffect(() => {
     (async () => {
@@ -17,26 +18,33 @@ function GetPokemon({ pokedex, poke_id }) {
     })();
   }, []);
 
-//   console.log(pokemon, loaded)
+  console.log(pokemon, loaded)
+
 
 
   return (
     <>
-    {loaded && 
-    <>
-    <img src={pokemon.sprites['front_default']}></img>
-    <h1>{pokemon.name}</h1>
-    <p>XP: {pokemon.base_experience} </p>
-    {pokemon.held_items ? 
-    pokemon.held_items.map(item => {
-        console.log(item)
-        return (
-            <p>{item.item.name}</p>
-        )
-    }) :
-    <p>No items</p>}
-    </>}
-      
+      {loaded && (
+        <div className="your-poke-card">
+          <img src={pokemon.sprites["front_default"]} alt={pokemon.name}></img>
+          <h1>{pokemon.name}</h1>
+          <p>XP: {pokemon.base_experience} </p>
+          {pokemon.held_items.map((item) => {
+            return (
+              // <p>{item.item.name}</p>
+              <Item pokedex={pokedex} name={item.item.name} />
+            );
+          })}
+          <p>Unlocked abilities:</p>
+          <ul>
+            {pokemon.abilities.map((ability) => {
+              if (ability.is_hidden === false) {
+                return <li key={key++}>{ability.ability.name}</li>;
+              }
+            })}
+          </ul>
+        </div>
+      )}
     </>
   );
 }

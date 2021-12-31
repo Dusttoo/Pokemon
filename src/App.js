@@ -27,7 +27,7 @@ function App(pokedex) {
   return (
     <>
       {bag ? (
-        <Bag pokedex={pokedex} />
+        <Bag pokedex={pokedex} openBag={openBag}/>
       ) : (
         <>
           {!pokeball ? (

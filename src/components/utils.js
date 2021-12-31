@@ -58,3 +58,26 @@ export function catchPokemon(data) {
   return parseInt(catchNum)
 
 }
+
+export function calculateXP(pokemon) {
+  // const xp = len(bag)
+
+}
+
+export const calculateUserLevel = () => {
+
+  let level = getCookie('level');
+  const xp = getCookie('xp')
+  const nextLevel = (level * 2000) + 1000
+
+  while(xp < nextLevel) {
+    if (xp >= nextLevel) {
+      level++;
+      //set level cookie
+    }
+
+    console.log(xp, nextLevel)
+  }
+  
+
+}
