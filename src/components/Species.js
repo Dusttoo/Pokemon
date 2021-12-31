@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { catchPokemon, getCookie, getRandomIntInclusive, setCookie } from "./utils";
+import { calculateXP, catchPokemon, getCookie, getRandomIntInclusive, setCookie } from "./utils";
 
-function Species({species, pokedex, caught_pokemon}) {
+function Species({species, pokedex, caught_pokemon, pokemon}) {
     const [speciesData, setSpeciesData] = useState('')
     const [loaded, setLoaded] = useState(false)
     const [caught, setCaught] = useState(false)
@@ -19,7 +19,7 @@ function Species({species, pokedex, caught_pokemon}) {
         })();
       }, []);
 
-        console.log(speciesData);
+        // console.log(speciesData, poke_list);
 
       const attemptCatch = () => {
         const all_pokemon = []
@@ -34,9 +34,8 @@ function Species({species, pokedex, caught_pokemon}) {
         }
         let max = catchPokemon(speciesData)
         const throw_attempt =getRandomIntInclusive(1, max)
-        console.log(typeof magicNum)
-        const lowest = parseInt(magicNum) - 10;
-        const highest = parseInt(magicNum) + 10;
+        const lowest = parseInt(magicNum) - 5;
+        const highest = parseInt(magicNum) + 5;
 
             console.log(
               "throw attempt",
@@ -54,6 +53,9 @@ function Species({species, pokedex, caught_pokemon}) {
             setCookie('poke_list', JSON.stringify(all_pokemon))
             setFailed(false)
             setCaught(true)
+            console.log('about to calculate')
+            calculateXP('caught', pokemon)
+            console.log('xp', getCookie('xp'))
           } else { setFailed(true)}
 
 
@@ -64,27 +66,47 @@ function Species({species, pokedex, caught_pokemon}) {
 
   return (
     <>
-      <h2>Species: {species.name}</h2>
-      {speciesData.habitat ? (
-        <p>Habitat: {speciesData.habitat.name}</p>
-      ) : (
-        <p>Habitat: Unknown</p>
-      )}
-
-      {!JSON.parse(poke_list).includes(speciesData.id) ? (
+      {loaded && (
         <>
-          {failedCatch && <p>Sorry, {speciesData.name} got away.
-          Try again?</p>}
-          {caught ? (
-            <p>Success you caught {speciesData.name}!</p>
+          <h2>Species: {species.name}</h2>
+          {speciesData.habitat ? (
+            <p>Habitat: {speciesData.habitat.name}</p>
           ) : (
-            <button className="catch-pokemon" onClick={attemptCatch}>
-              Try to catch?
-            </button>
+            <p>Habitat: Unknown</p>
+          )}
+          {!poke_list ? (
+            <>{failedCatch && (
+                    <p>Sorry, {speciesData.name} got away. Try again?</p>
+                  )}
+                  {caught ? (
+                    <p>Success you caught {speciesData.name}!</p>
+                  ) : (
+                    <button className="catch-pokemon" onClick={attemptCatch}>
+                      Try to catch?
+                    </button>
+                  )}
+            </>
+          ) : (
+            <>
+              {!JSON.parse(poke_list).includes(speciesData.id) ? (
+                <>
+                  {failedCatch && (
+                    <p>Sorry, {speciesData.name} got away. Try again?</p>
+                  )}
+                  {caught ? (
+                    <p>Success you caught {speciesData.name}!</p>
+                  ) : (
+                    <button className="catch-pokemon" onClick={attemptCatch}>
+                      Try to catch?
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>You own this pokemon</p>
+              )}
+            </>
           )}
         </>
-      ) : (
-        <p>You own this pokemon</p>
       )}
     </>
   );

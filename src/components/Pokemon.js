@@ -37,7 +37,7 @@ function Pokemon({ pokedex, rethrow }) {
                 alt={pokemonData.name}
               />
               <h2>XP: {pokemonData.base_experience}</h2>
-              <Species species={pokemonData.species} pokedex={pokedex} caught_pokemon={caught_pokemon}/>
+              <Species species={pokemonData.species} pokedex={pokedex} caught_pokemon={caught_pokemon} pokemon={pokemonData}/>
               <PokemonStats stats={pokemonData.stats} />
                 {rethrow}
                 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Pokemon from './components/Pokemon';
-import { eraseCookie, getCookie, storePokeId } from './components/utils';
+import { calculateUserLevel, eraseCookie, getCookie, setCookie, storePokeId } from './components/utils';
 import Bag from './components/Your_Pokemon';
 import './index.css'
 
@@ -9,8 +9,12 @@ function App(pokedex) {
   const [pokeball, openPokeball] = useState(false)
   const [firstThrow, setFirstThrow] = useState(false)
   const [bag, openBag] = useState(false)
+  const [userLevel, setLevel] = useState(calculateUserLevel());
   const cookie = getCookie('poke_id')
-  console.log(bag)
+  const xp = getCookie('xp')
+  const level = getCookie('level')
+  console.log('xp: ',xp,'level: ', level, 'user level', userLevel)
+
 
 
     useEffect(() => {
@@ -19,6 +23,12 @@ function App(pokedex) {
       } else {
         setFirstThrow(true)
       }
+
+      if (!xp && !level) {
+        setCookie('xp', '0', 7)
+        setCookie('level', '0', 7)
+      }
+
     }, []);
 
   
