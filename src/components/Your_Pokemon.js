@@ -1,28 +1,21 @@
 import { useEffect, useState } from "react";
+import GetPokemon from "./Get_Pokemon";
 import { getCookie } from "./utils";
 
 function Bag({ pokedex }) {
   const poke_list = getCookie('poke_list')
-  const my_pokemon = []
   const parsed = JSON.parse(poke_list);
+  const [loaded, setLoaded] = useState(false)
+  const my_pokemon = [];
 
 
-    useEffect(() => {
-        
 
-    }, []);
 
-    const getMyPokemon = () => {
-          parsed.map((poke_id) => {
-            pokedex.pokedex.getPokemonByName(poke_id).then(res => {
-                my_pokemon.push(res)
-            })
-            console.log(my_pokemon)
-          })        
-    }
 
-getMyPokemon();
-    console.log(my_pokemon)
+            
+          
+
+console.log(my_pokemon);
 
 
 
@@ -30,10 +23,11 @@ getMyPokemon();
   return (
     <>
     <h1>Bag</h1>
-    {my_pokemon.map(pokemon => {
-
+    {parsed.map(pokemon => {
+      console.log(pokemon)
         return(
-            <h3>{pokemon.name}</h3>
+            <GetPokemon poke_id={pokemon} pokedex={pokedex}/>
+            // <h1>{pokemon.name}</h1>
         )
     })}
     </>
