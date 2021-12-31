@@ -10,7 +10,6 @@ function GetPokemon({ pokedex, poke_id, openBag }) {
   useEffect(() => {
     (async () => {
     const pokemon = await pokedex.pokedex.getPokemonByName(poke_id);
-    // console.log(pokemon);
     if (pokemon) {
       setPokemon(pokemon);
       setLoaded(true);
@@ -18,7 +17,6 @@ function GetPokemon({ pokedex, poke_id, openBag }) {
     })();
   }, []);
 
-  console.log(pokemon, loaded)
 
 
 

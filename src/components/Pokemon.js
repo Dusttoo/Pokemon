@@ -14,7 +14,6 @@ function Pokemon({ pokedex, rethrow }) {
   useEffect(() => {
     (async () => {
       const rendered_pokemon = await pokedex.pokedex.getPokemonByName(poke_id);
-      console.log(rendered_pokemon);
       if (rendered_pokemon) {
         setPokemonData(rendered_pokemon);
         setLoaded(true);
@@ -22,7 +21,6 @@ function Pokemon({ pokedex, rethrow }) {
     })();
   }, []);
 
-  //   console.log(pokemonData)
 
   return (
     <div className="pokemon-container">

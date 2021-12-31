@@ -14,7 +14,6 @@ function App(pokedex) {
   const xp = getCookie('xp')
   const level = getCookie('level')
   const poke_list = getCookie('poke_list')
-  console.log('xp: ',xp,'level: ', level, 'user level', userLevel)
 
 
 
@@ -71,7 +70,7 @@ function App(pokedex) {
               >
                 Your Pokemon
               </button>
-              <p>Current level: {userLevel}</p>
+              <p>Current level: {userLevel} Current xp: {xp}</p>
               <p>You have caught {JSON.parse(poke_list).length} pokemon</p>
 
             </>

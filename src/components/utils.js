@@ -43,7 +43,6 @@ export function getRandomIntInclusive(min, max) {
 
 export function catchPokemon(data) {
   const catchNum = getCookie('catch_num')
-  console.log('catch num', catchNum)
   if(!catchNum) {
       let max = data.capture_rate;
       if (data.is_baby) max /= 3;
@@ -51,7 +50,6 @@ export function catchPokemon(data) {
       if (data.is_mythical) max *= 15;
 
       const toCatch = getRandomIntInclusive(1, max);
-      console.log(toCatch)
       setCookie("catch_num", toCatch, 7);
   }
 
@@ -61,7 +59,6 @@ export function catchPokemon(data) {
 }
 
 export function calculateXP(event, pokemon) {
-  console.log(pokemon, event)
   let xp;
   let level;
   let xpCookie = getCookie('xp')
@@ -75,10 +72,8 @@ export function calculateXP(event, pokemon) {
   
   xp = parseInt(xpCookie)
   level = parseInt(levelCookie)
-  console.log(xp, typeof xp, level, typeof level)
   if(event === 'caught') {
     xp += pokemon.base_experience * (+level + 1)
-    console.log(xp, typeof xp)
     setCookie('xp', xp, 7)
   }
 }
@@ -91,14 +86,12 @@ export const calculateUserLevel = () => {
   let xp = parseInt(xpCookie);
   let level = parseInt(levelCookie);
   const nextLevel = (level * 2000) + 1000
-  console.log("current xp", xp, "next level", nextLevel);
 
     if (xp >= nextLevel) {
       level++;
       setCookie('level', level, 7)
     } 
 
-    console.log('current xp', xp, 'next level', nextLevel)
     return level;
 
   
