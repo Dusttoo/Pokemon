@@ -26,7 +26,7 @@ console.log(my_pokemon);
     {parsed.map(pokemon => {
       console.log(pokemon)
         return(
-            <GetPokemon poke_id={pokemon} pokedex={pokedex}/>
+            <GetPokemon key={pokemon} poke_id={pokemon} pokedex={pokedex}/>
             // <h1>{pokemon.name}</h1>
         )
     })}

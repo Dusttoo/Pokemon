@@ -11,19 +11,32 @@ function GetPokemon({ pokedex, poke_id }) {
     const pokemon = await pokedex.pokedex.getPokemonByName(poke_id);
     // console.log(pokemon);
     if (pokemon) {
-      setLoaded(true);
       setPokemon(pokemon);
+      setLoaded(true);
     }
     })();
   }, []);
 
-  console.log(pokemon, loaded)
+//   console.log(pokemon, loaded)
 
 
   return (
     <>
-
-      <h1>{pokemon.name}</h1>
+    {loaded && 
+    <>
+    <img src={pokemon.sprites['front_default']}></img>
+    <h1>{pokemon.name}</h1>
+    <p>XP: {pokemon.base_experience} </p>
+    {pokemon.held_items ? 
+    pokemon.held_items.map(item => {
+        console.log(item)
+        return (
+            <p>{item.item.name}</p>
+        )
+    }) :
+    <p>No items</p>}
+    </>}
+      
     </>
   );
 }
