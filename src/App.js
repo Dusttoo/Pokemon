@@ -9,15 +9,20 @@ function App(pokedex) {
   const [pokeball, openPokeball] = useState(false)
   const [firstThrow, setFirstThrow] = useState(false)
   const [bag, openBag] = useState(false)
-  const [userLevel, setLevel] = useState(calculateUserLevel());
+  const [userLevel, setLevel] = useState(0);
   const cookie = getCookie('poke_id')
   const xp = getCookie('xp')
   const level = getCookie('level')
+  const poke_list = getCookie('poke_list')
   console.log('xp: ',xp,'level: ', level, 'user level', userLevel)
 
 
 
     useEffect(() => {
+
+      const currentLevel = calculateUserLevel()
+      setLevel(currentLevel)
+
       if (cookie) {
         openPokeball(true);
       } else {
@@ -29,7 +34,7 @@ function App(pokedex) {
         setCookie('level', '0', 7)
       }
 
-    }, []);
+    }, [userLevel]);
 
   
 
@@ -66,6 +71,9 @@ function App(pokedex) {
               >
                 Your Pokemon
               </button>
+              <p>Current level: {userLevel}</p>
+              <p>You have caught {JSON.parse(poke_list).length} pokemon</p>
+
             </>
           ) : (
             <>

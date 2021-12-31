@@ -62,11 +62,19 @@ export function catchPokemon(data) {
 
 export function calculateXP(event, pokemon) {
   console.log(pokemon, event)
+  let xp;
+  let level;
   let xpCookie = getCookie('xp')
   const levelCookie = getCookie('level')
-
-  let xp = parseInt(xpCookie)
-  const level = parseInt(levelCookie)
+  if(!xpCookie) {
+    xp = '0'
+  }
+  if(!levelCookie) {
+    level = '0'
+  }
+  
+  xp = parseInt(xpCookie)
+  level = parseInt(levelCookie)
   console.log(xp, typeof xp, level, typeof level)
   if(event === 'caught') {
     xp += pokemon.base_experience * (+level + 1)
@@ -77,20 +85,22 @@ export function calculateXP(event, pokemon) {
 
 export const calculateUserLevel = () => {
 
-  let level = getCookie('level');
-  const xp = getCookie('xp')
-  const nextLevel = (level * 2000) + 1000
+  let xpCookie = getCookie("xp");
+  const levelCookie = getCookie("level");
 
-  while(xp < nextLevel) {
+  let xp = parseInt(xpCookie);
+  let level = parseInt(levelCookie);
+  const nextLevel = (level * 2000) + 1000
+  console.log("current xp", xp, "next level", nextLevel);
+
     if (xp >= nextLevel) {
       level++;
       setCookie('level', level, 7)
     } 
 
-    console.log(xp, nextLevel)
+    console.log('current xp', xp, 'next level', nextLevel)
     return level;
 
-  }
   
 
 }
