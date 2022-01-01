@@ -18,7 +18,6 @@ function GetPokemon({ pokedex, poke_id, openBag }) {
     })();
   }, []);
 
-    console.log(pokemon)
 
 
 

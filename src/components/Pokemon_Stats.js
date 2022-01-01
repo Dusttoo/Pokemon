@@ -6,7 +6,6 @@ function PokemonStats({stats}) {
   return (
     <div className="stats">
         {stats.map(stat => {
-          console.log(stat)
             return(
             <div key={statId += 1}
             className="stat-container">

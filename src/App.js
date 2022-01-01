@@ -15,7 +15,8 @@ function App(pokedex) {
   const level = getCookie('level')
   const poke_list = getCookie('poke_list')
   const userLevel = calculateUserLevel()
-  console.log(xp, level, userLevel)
+  const [attempts, addAttempt] = useState(0);
+
 
   //need to dynamicallly render level
 
@@ -80,7 +81,7 @@ function App(pokedex) {
                 Current level: {userLevel} Current xp: {xp} Next level in:{" "}
                 {level * 2000 + 1000 - xp}
               </p>
-              <ProgressBar completed={(xp / (level * 2000 + 1000)) * 100} />
+              <ProgressBar completed={Math.ceil((xp / (level * 2000 + 1000)) * 100)} />
               {poke_list ? (
                 <p className="level-container">
                   You have caught {JSON.parse(poke_list).length} pokemon
@@ -102,6 +103,8 @@ function App(pokedex) {
               )}
               <Pokemon
                 pokedex={pokedex}
+                addAttempt={addAttempt}
+                attempts={attempts}
                 rethrow={
                   <button
                     className="rethrow-button"
@@ -110,6 +113,7 @@ function App(pokedex) {
                       eraseCookie("poke_id");
                       eraseCookie("catch_num");
                       setFirstThrow(false);
+                      addAttempt(0)
                     }}
                   >
                     Throw Pokeball Again?

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { calculateXP, catchPokemon, getCookie, getRandomIntInclusive, setCookie } from "./utils";
 
-function Species({species, pokedex, caught_pokemon, pokemon}) {
+function Species({species, pokedex, addAttempt, attempts, pokemon}) {
     const [speciesData, setSpeciesData] = useState('')
     const [loaded, setLoaded] = useState(false)
     const [caught, setCaught] = useState(false)
@@ -43,6 +43,8 @@ function Species({species, pokedex, caught_pokemon, pokemon}) {
             calculateXP('caught', pokemon)
           } else { setFailed(true)}
 
+          addAttempt(attempts + 1)
+
 
       }
 
@@ -59,33 +61,17 @@ function Species({species, pokedex, caught_pokemon, pokemon}) {
           ) : (
             <p>Habitat: Unknown</p>
           )}
-          {!poke_list ? (
+          {console.log('species attempt' , attempts)}
+          {attempts < 4 ? (
             <>
-              {failedCatch && (
-                <p>Sorry, {speciesData.name} got away. Try again?</p>
-              )}
-              {caught ? (
-                <p>Success you caught {speciesData.name}!</p>
-              ) : (
-                <button className="catch-pokemon" onClick={attemptCatch}>
-                  Try to catch?
-                </button>
-              )}
-            </>
-          ) : (
-            <>
-              {!JSON.parse(poke_list).includes(speciesData.id) ? (
+              {" "}
+              {!poke_list ? (
                 <>
                   {failedCatch && (
                     <p>Sorry, {speciesData.name} got away. Try again?</p>
                   )}
                   {caught ? (
-                    <>{console.log(caught)}
-                    <p>
-
-                      Success you caught {speciesData.name} for{" "}
-                      {pokemon.base_experience * (+level + 1)} xp!
-                    </p></>
+                    <p>Success you caught {speciesData.name}!</p>
                   ) : (
                     <button className="catch-pokemon" onClick={attemptCatch}>
                       Try to catch?
@@ -94,17 +80,45 @@ function Species({species, pokedex, caught_pokemon, pokemon}) {
                 </>
               ) : (
                 <>
-                  {caught ? (
-                    <p>
-                      Success you caught {speciesData.name} for{" "}
-                      {pokemon.base_experience * (+level + 1)} xp!
-                    </p>
+                  {!JSON.parse(poke_list).includes(speciesData.id) ? (
+                    <>
+                      {failedCatch && (
+                        <p>Sorry, {speciesData.name} got away. Try again?</p>
+                      )}
+                      {caught ? (
+                        <>
+                          {console.log(caught)}
+                          <p>
+                            Success you caught {speciesData.name} for{" "}
+                            {pokemon.base_experience * (+level + 1)} xp!
+                          </p>
+                        </>
+                      ) : (
+                        <button
+                          className="catch-pokemon"
+                          onClick={attemptCatch}
+                        >
+                          Try to catch?
+                        </button>
+                      )}
+                    </>
                   ) : (
-                    <p>You own this pokemon</p>
+                    <>
+                      {caught ? (
+                        <p>
+                          Success you caught {speciesData.name} for{" "}
+                          {pokemon.base_experience * (+level + 1)} xp!
+                        </p>
+                      ) : (
+                        <p>You own this pokemon</p>
+                      )}
+                    </>
                   )}
                 </>
               )}
             </>
+          ) : (
+            <p>Uh oh, {speciesData.name} has fleed. Better luck next time!</p>
           )}
         </>
       )}
