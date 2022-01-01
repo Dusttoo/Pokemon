@@ -15,7 +15,7 @@ function App(pokedex) {
   const level = getCookie('level')
   const poke_list = getCookie('poke_list')
   const userLevel = calculateUserLevel()
-  const [attempts, addAttempt] = useState(0);
+  const [attempts, addAttempt] = useState(1);
 
 
   //need to dynamicallly render level
@@ -113,7 +113,7 @@ function App(pokedex) {
                       eraseCookie("poke_id");
                       eraseCookie("catch_num");
                       setFirstThrow(false);
-                      addAttempt(0)
+                      addAttempt(1)
                     }}
                   >
                     Throw Pokeball Again?

@@ -34,14 +34,31 @@ function Species({species, pokedex, addAttempt, attempts, pokemon}) {
         const lowest = parseInt(magicNum) - 5;
         const highest = parseInt(magicNum) + 5;
 
-        if(throw_attempt < highest &&
-          throw_attempt > lowest) {
-            all_pokemon.push(speciesData.id)
-            setCookie('poke_list', JSON.stringify(all_pokemon))
-            setFailed(false)
-            setCaught(true)
-            calculateXP('caught', pokemon)
-          } else { setFailed(true)}
+        console.log(attempts)
+
+        if(attempts <= 3) {
+        console.log(
+          "throw attempt",
+          throw_attempt,
+          "high",
+          highest,
+          "low",
+          lowest
+        );
+
+          if (throw_attempt < highest && throw_attempt > lowest) {
+            all_pokemon.push(speciesData.id);
+            setCookie("poke_list", JSON.stringify(all_pokemon));
+            setFailed(false);
+            setCaught(true);
+            calculateXP("caught", pokemon);
+          } else {
+            setFailed(true);
+          }
+        } else {
+          console.log('fleed no points')
+        }
+        
 
           addAttempt(attempts + 1)
 
@@ -61,10 +78,8 @@ function Species({species, pokedex, addAttempt, attempts, pokemon}) {
           ) : (
             <p>Habitat: Unknown</p>
           )}
-          {console.log('species attempt' , attempts)}
           {attempts < 4 ? (
             <>
-              {" "}
               {!poke_list ? (
                 <>
                   {failedCatch && (
@@ -87,7 +102,6 @@ function Species({species, pokedex, addAttempt, attempts, pokemon}) {
                       )}
                       {caught ? (
                         <>
-                          {console.log(caught)}
                           <p>
                             Success you caught {speciesData.name} for{" "}
                             {pokemon.base_experience * (+level + 1)} xp!
