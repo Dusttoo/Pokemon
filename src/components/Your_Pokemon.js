@@ -9,17 +9,24 @@ function Bag({ pokedex, openBag }) {
 
   return (
     <>
-      <h1>Bag</h1>
       <div className="your-pokemon-container">
-        {parsed ? parsed.map((pokemon) => {
-          return (
-            <GetPokemon key={pokemon} poke_id={pokemon} pokedex={pokedex} />
-            // <h1>{pokemon.name}</h1>
-          );
-        }) :
-        <h1>Your bag is empty</h1>}
+        <div className="bag-header">
+          <h1>Bag</h1>
+          <button className='continue-button' onClick={() => openBag(false)}>Continue exploring?</button>
+        </div>
+        <div className="your-poke-cards">
+          {parsed ? (
+            parsed.map((pokemon) => {
+              return (
+                <GetPokemon key={pokemon} poke_id={pokemon} pokedex={pokedex} />
+                // <h1>{pokemon.name}</h1>
+              );
+            })
+          ) : (
+            <h1>Your bag is empty</h1>
+          )}
+        </div>
       </div>
-      <button onClick={() => openBag(false)}>Continue exploring?</button>
     </>
   );
 }

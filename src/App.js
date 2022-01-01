@@ -39,9 +39,8 @@ function App(pokedex) {
 
   return (
     <>
-      {bag ? (
-        <Bag pokedex={pokedex} openBag={openBag} />
-      ) : (
+      <div className="main-container">
+        {bag && <Bag pokedex={pokedex} openBag={openBag} />}
         <>
           {!pokeball ? (
             <>
@@ -64,13 +63,13 @@ function App(pokedex) {
               </div>
               <div className="bag-button-container">
                 <button
-                className='bag-button'
+                  className="bag-button"
                   onClick={() => {
                     openBag(true);
                   }}
                 >
                   <img
-                    className='bag-image'
+                    className="bag-image"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrzUFlpFn1MNsq7-MjbOBkZBtXUugfODtpVg&usqp=CAU"
                     alt="inventory bag"
                   />
@@ -120,7 +119,7 @@ function App(pokedex) {
             </>
           )}
         </>
-      )}
+      </div>
     </>
   );
 }
