@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getCookie } from "./utils";
 
 function Item({ pokedex, name }) {
   const [loaded, setLoaded] = useState(false);
@@ -14,7 +13,6 @@ function Item({ pokedex, name }) {
       }
     })();
   }, []);
-
 
   return (
     <>

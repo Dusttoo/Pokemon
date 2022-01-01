@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
 import GetPokemon from "./Get_Pokemon";
 import { getCookie } from "./utils";
 
 function Bag({ pokedex, openBag }) {
-  const poke_list = getCookie('poke_list')
+  const poke_list = getCookie("poke_list");
   const parsed = JSON.parse(poke_list);
-  const [loaded, setLoaded] = useState(false)
 
   return (
     <>
       <div className="your-pokemon-container">
         <div className="bag-header">
           <h1>Bag</h1>
-          <button className='continue-button' onClick={() => openBag(false)}>Continue exploring?</button>
+          <button className="continue-button" onClick={() => openBag(false)}>
+            Continue exploring?
+          </button>
         </div>
         <div className="your-poke-cards">
           {parsed ? (

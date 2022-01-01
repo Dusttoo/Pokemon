@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PokemonStats from "./Pokemon_Stats";
 import Species from "./Species";
-import { getCookie} from "./utils";
+import { getCookie } from "./utils";
 import "./pokemon.css";
 
 function Pokemon({ pokedex, rethrow, addAttempt, attempts }) {

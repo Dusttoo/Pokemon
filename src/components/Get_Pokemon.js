@@ -1,25 +1,21 @@
 import { useEffect, useState } from "react";
-import { getCookie } from "./utils";
 import Item from "./Item";
 import PokemonStats from "./Pokemon_Stats";
 
-function GetPokemon({ pokedex, poke_id, openBag }) {
+function GetPokemon({ pokedex, poke_id }) {
   const [loaded, setLoaded] = useState(false);
-  const [pokemon, setPokemon] = useState({})
-  let key = 0
+  const [pokemon, setPokemon] = useState({});
+  let key = 0;
 
   useEffect(() => {
     (async () => {
-    const pokemon = await pokedex.pokedex.getPokemonByName(poke_id);
-    if (pokemon) {
-      setPokemon(pokemon);
-      setLoaded(true);
-    }
+      const pokemon = await pokedex.pokedex.getPokemonByName(poke_id);
+      if (pokemon) {
+        setPokemon(pokemon);
+        setLoaded(true);
+      }
     })();
   }, []);
-
-
-
 
   return (
     <>

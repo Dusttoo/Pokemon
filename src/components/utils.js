@@ -26,13 +26,13 @@ export function eraseCookie(name) {
 }
 
 export function storePokeId() {
-    const cookie = getCookie("poke_id");
+  const cookie = getCookie("poke_id");
 
-    if (!cookie) {
-      const id = randomPokemon();
-      setCookie("poke_id", id, 7);
-      return id
-    } 
+  if (!cookie) {
+    const id = randomPokemon();
+    setCookie("poke_id", id, 7);
+    return id;
+  }
 }
 
 export function getRandomIntInclusive(min, max) {
@@ -42,58 +42,52 @@ export function getRandomIntInclusive(min, max) {
 }
 
 export function catchPokemon(data) {
-  const catchNum = getCookie('catch_num')
-  if(!catchNum) {
-      let max = data.capture_rate;
-      if (data.is_baby) max /= 3;
-      if (data.is_legendary) max *= 10;
-      if (data.is_mythical) max *= 15;
+  const catchNum = getCookie("catch_num");
+  if (!catchNum) {
+    let max = data.capture_rate;
+    if (data.is_baby) max /= 3;
+    if (data.is_legendary) max *= 10;
+    if (data.is_mythical) max *= 15;
 
-      const toCatch = getRandomIntInclusive(1, max);
-      setCookie("catch_num", toCatch, 7);
+    const toCatch = getRandomIntInclusive(1, max);
+    setCookie("catch_num", toCatch, 7);
   }
 
-
-  return parseInt(catchNum)
-
+  return parseInt(catchNum);
 }
 
 export function calculateXP(event, pokemon) {
   let xp;
   let level;
-  let xpCookie = getCookie('xp')
-  const levelCookie = getCookie('level')
-  if(!xpCookie) {
-    xp = '0'
+  let xpCookie = getCookie("xp");
+  const levelCookie = getCookie("level");
+  if (!xpCookie) {
+    xp = "0";
   }
-  if(!levelCookie) {
-    level = '0'
+  if (!levelCookie) {
+    level = "0";
   }
-  
-  xp = parseInt(xpCookie)
-  level = parseInt(levelCookie)
-  if(event === 'caught') {
-    xp += pokemon.base_experience * (+level + 1)
-    setCookie('xp', xp, 7)
+
+  xp = parseInt(xpCookie);
+  level = parseInt(levelCookie);
+  if (event === "caught") {
+    xp += pokemon.base_experience * (+level + 1);
+    setCookie("xp", xp, 7);
   }
 }
 
 export const calculateUserLevel = () => {
-
   let xpCookie = getCookie("xp");
   const levelCookie = getCookie("level");
 
   let xp = parseInt(xpCookie);
   let level = parseInt(levelCookie);
-  const nextLevel = (level * 2000) + 1000
+  const nextLevel = level * 2000 + 1000;
 
-    if (xp >= nextLevel) {
-      level++;
-      setCookie('level', level, 7)
-    } 
+  if (xp >= nextLevel) {
+    level++;
+    setCookie("level", level, 7);
+  }
 
-    return level;
-
-  
-
-}
+  return level;
+};
