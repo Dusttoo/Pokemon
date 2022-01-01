@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Pokemon from './components/Pokemon';
+import ProgressBar from './components/ProgressBar';
 import { calculateUserLevel, eraseCookie, getCookie, setCookie, storePokeId } from './components/utils';
 import Bag from './components/Your_Pokemon';
 import './index.css'
@@ -39,7 +40,7 @@ function App(pokedex) {
   return (
     <>
       {bag ? (
-        <Bag pokedex={pokedex} openBag={openBag}/>
+        <Bag pokedex={pokedex} openBag={openBag} />
       ) : (
         <>
           {!pokeball ? (
@@ -61,19 +62,29 @@ function App(pokedex) {
                   />
                 </button>
               </div>
-              <button
-                onClick={() => {
-                  openBag(true);
-                }}
-              >
-                Your Pokemon
-              </button>
-              <p>Current level: {userLevel} Current xp: {xp} Next level in: {((level * 2000) + 1000) - xp}</p>
-              {poke_list ? 
-              <p>You have caught {JSON.parse(poke_list).length} pokemon</p> :
-              <p>You haven't caught any pokemon yet!</p>
-            }
-
+              <div className="bag-button-container">
+                <button
+                  onClick={() => {
+                    openBag(true);
+                  }}
+                >
+                  Your Pokemon
+                </button>
+              </div>
+              <p className="level-container">
+                Current level: {userLevel} Current xp: {xp} Next level in:{" "}
+                {level * 2000 + 1000 - xp}
+              </p>
+              <ProgressBar completed={(xp / (level * 2000 + 1000)) * 100} />
+              {poke_list ? (
+                <p className="level-container">
+                  You have caught {JSON.parse(poke_list).length} pokemon
+                </p>
+              ) : (
+                <p className="level-container">
+                  You haven't caught any pokemon yet!
+                </p>
+              )}
             </>
           ) : (
             <>

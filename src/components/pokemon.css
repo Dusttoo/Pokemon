@@ -94,3 +94,12 @@
     align-items: center;
 }
 
+.bag-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.level-container {
+    text-align: center;
+}
