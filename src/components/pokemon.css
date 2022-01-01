@@ -103,3 +103,23 @@
 .level-container {
     text-align: center;
 }
+
+.bag-button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bag-button:hover {
+    border: 2px solid #fbd743;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.bag-image {
+    height: 50px;
+}
+
+

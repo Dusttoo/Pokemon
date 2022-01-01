@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProgressBar = ({ completed}) => {
 
-      const bgcolor = "#3B4CCA";
+      const bgcolor = "#fbd743";
       const containerStyles = {
         height: 20,
         width: "100%",
@@ -10,7 +10,7 @@ const ProgressBar = ({ completed}) => {
         borderRadius: 50,
         marginTop: 50,
         marginBottom: 50,
-        
+
       };
 
       const fillerStyles = {
